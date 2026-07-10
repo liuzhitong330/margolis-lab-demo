@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Opioid Receptor Heterogeneity in Addiction Circuits — Cathy Liu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body { font-family: Georgia, serif; max-width: 720px; margin: 0 auto;
+         padding: 2.5rem 1.5rem 4rem; line-height: 1.65; color: #222; background: #fff; }
+  h1, h2 { font-family: -apple-system, system-ui, sans-serif; }
+  h1 { font-size: 1.45rem; margin-bottom: .2rem; }
+  .byline { font-family: system-ui, sans-serif; font-size: .85rem; color: #777; margin-bottom: 2rem; }
+  h2 { font-size: 1.1rem; margin-top: 2.5rem; border-bottom: 1px solid #eee; padding-bottom: .3rem; }
+  .note { background: #f6f6f4; border-left: 3px solid #999; padding: .8rem 1rem;
+          font-family: system-ui, sans-serif; font-size: .85rem; color: #444; margin: 1.2rem 0; }
+  figure { margin: 1.2rem 0; }
+  figure img { max-width: 100%; display: block; }
+  figcaption { font-family: system-ui, sans-serif; font-size: .78rem; color: #777; margin-top: .4rem; }
+  a { color: #2255aa; }
+  .meta { font-family: system-ui, sans-serif; font-size: .8rem; color: #888;
+          margin-top: 3rem; border-top: 1px solid #eee; padding-top: 1rem; }
+  .tag { display: inline-block; font-family: system-ui, sans-serif; font-size: .75rem;
+         background: #eef2f8; color: #2255aa; padding: .15rem .5rem;
+         border-radius: 3px; margin-right: .3rem; }
+  .highlight  { background: #fff8f0; border-left: 3px solid #e67e22; padding: .6rem 1rem;
+                font-family: system-ui, sans-serif; font-size: .88rem; margin: 1rem 0; }
+  .highlight2 { background: #f5f0ff; border-left: 3px solid #8e44ad; padding: .6rem 1rem;
+                font-family: system-ui, sans-serif; font-size: .88rem; margin: 1rem 0; }
+  .highlight3 { background: #f0f4ff; border-left: 3px solid #1a5c8a; padding: .6rem 1rem;
+                font-family: system-ui, sans-serif; font-size: .88rem; margin: 1rem 0; }
+</style>
+</head>
+<body>
+
+<h1>Opioid Receptor Heterogeneity in Addiction Circuits: VTA Is KOR Country</h1>
+<div class="byline">Cathy Liu · cathyliu014@gmail.com · personal exploratory project, July 2026</div>
+
+<span class="tag">opioid receptors</span>
+<span class="tag">VTA</span>
+<span class="tag">lateral habenula</span>
+<span class="tag">Allen Brain Atlas</span>
+<span class="tag">addiction circuits</span>
+<span class="tag">KOR signaling</span>
+<span class="tag">Python</span>
+
+<p style="margin-top:1.2rem">
+The
+<a href="https://elyssabmargolis.com/" target="_blank">Margolis lab</a>
+uses ex vivo brain slice electrophysiology to study how opioid receptors shape
+motivated behavior and addiction across the VTA and lateral habenula circuits. Their core
+methodological insight is that you can't predict in vivo pharmacology from receptor binding
+assays alone — you need to read out actual synaptic physiology to know which receptor subtypes
+are doing what in a given circuit. The 2017 Morales & Margolis review of VTA cellular
+heterogeneity (1,155 citations) laid out why this matters: VTA is not a uniform dopamine
+population, and the opioid pharmacology of each subpopulation is distinct.
+</p>
+<p>
+I wanted to see what the receptor-level heterogeneity actually looks like across the circuits
+the lab studies — and whether the Allen Mouse Brain Atlas ISH data could tell that story from
+expression patterns alone.
+</p>
+
+<div class="note">
+<strong>What this is.</strong> Personal exploratory analysis, not novel research.
+Opioid receptor ISH expression densities downloaded from the
+<a href="https://mouse.brain-map.org/" target="_blank">Allen Mouse Brain Atlas</a> (ABA) API,
+July 2026. Experiments: Oprm1 (exp. 69860840), Oprk1 (exp. 80517217), Oprd1 (exp. 100144385).
+Regions selected for relevance to the Margolis lab's published work on VTA, lateral habenula,
+and addiction circuitry. Expression density = fraction of pixels above threshold per structure.
+Figure 2 is a schematic based on Margolis EB (2025) biorXiv — not a re-analysis of their data.
+</div>
+
+<h2>VTA has almost no mu opioid receptor — but is the highest KOR-expressing midbrain structure</h2>
+
+<figure>
+  <img src="opioid_expression.svg?v=1"
+       alt="Grouped bar chart of MOR/KOR/DOR expression density across 11 brain regions">
+  <figcaption>ISH expression density (Allen Mouse Brain Atlas) for mu (Oprm1), kappa (Oprk1),
+  and delta (Oprd1) opioid receptors across 11 brain regions relevant to addiction. Highlighted
+  columns are primary Margolis lab targets. VTA MOR density = 0.00007 — essentially absent —
+  while VTA KOR density = 0.00719, the highest among midbrain structures. By contrast, lateral
+  habenula (LHb) and medial habenula (MHb) carry the highest MOR loads (0.00936 and 0.01203).
+  NAc has high DOR (0.00853) and substantial KOR (0.00340).
+  </figcaption>
+</figure>
+
+<div class="highlight">
+<strong>The VTA is not a mu opioid receptor structure — it's a kappa opioid receptor structure.</strong>
+This matters because virtually all classical addiction pharmacology (morphine, heroin, opioid
+analgesics) acts primarily through MOR. If VTA DA neurons express almost no MOR (0.00007),
+the circuit logic of opioid reward has to be indirect — likely via MOR-expressing GABA neurons
+that disinhibit DA cells, or via habenular input. The Margolis lab has long emphasized that VTA
+heterogeneity means you can't lump "VTA pharmacology" together, and the receptor data here
+makes that point concretely: the VTA you hear about in textbooks is primarily a KOR story,
+not a MOR story.
+</div>
+
+<div class="highlight3">
+<strong>Habenula carries the highest MOR density of any structure examined — twice that of any
+other region (MHb: 0.01203).</strong>
+The Margolis lab studies the lateral habenula as an aversion and withdrawal circuit.
+MOR agonists in the habenula suppress its activity; MOR withdrawal in habenula is a key
+component of the aversive state of opioid abstinence. The expression data quantifies why
+LHb and MHb are pharmacologically distinct from VTA: they are MOR-dominant, whereas VTA
+is KOR-dominant. This receptor dichotomy maps onto a behavioral dichotomy — reward vs. aversion
+— that the lab's circuit work is designed to explain mechanistically.
+</div>
+
+<h2>When stress flips KOR from brake to accelerator</h2>
+
+<figure>
+  <img src="kor_signaling.svg?v=1"
+       alt="Schematic: stress reverses KOR signaling from inhibitory to excitatory in VTA DA neurons">
+  <figcaption>Schematic representation of the key finding in Margolis EB (2025) biorXiv:
+  in a specific subset of VTA dopamine neurons that project to prefrontal cortex, kappa opioid
+  receptor activation switches from inhibitory to excitatory following stress. The same receptor,
+  same agonist (dynorphin) — but opposite output. This is not a general VTA phenomenon; it's
+  specific to the cortically-projecting subpopulation, consistent with the heterogeneity
+  framework established in the 2017 Morales & Margolis review.
+  </figcaption>
+</figure>
+
+<div class="highlight2">
+<strong>A receptor that switches polarity under stress is a fundamentally different pharmacological
+target than one with a fixed response.</strong>
+Standard opioid pharmacology assumes a direction: KOR activation inhibits DA neurons (dynorphin
+is the "aversion" neuropeptide). The 2025 finding breaks this: in stressed animals, KOR
+activation excites a subset of VTA DA neurons. This means that dynorphin released during
+stress would drive — not suppress — activity in the cortically-projecting DA population.
+The downstream implications for prefrontal dopamine, cognitive control, and stress-potentiated
+craving are significant, and connecting them to circuit-level mechanisms is exactly the kind
+of question that ex vivo electrophysiology (the lab's primary tool) can address in ways that
+binding assays or genetic approaches alone cannot.
+</div>
+
+<h2>Connection to the lab's work</h2>
+<ul>
+<li>
+<strong>Receptor heterogeneity and pharmacological prediction:</strong>
+The ABA expression data raises the question of which VTA cell types express KOR — is it the
+TH+ DA neurons, the GABA interneurons, or both? The lab's single-neuron pharmacological
+screening approach would be the right tool to map this at physiological resolution, and I'd
+be excited to contribute to that kind of experiment.
+</li>
+<li>
+<strong>The KOR signaling reversal:</strong>
+I'm particularly curious about the mechanism behind the stress-induced switch. GPCR signaling
+bias (Gi vs. Gq coupling) is one candidate; changes in downstream effectors (Kir3, HCN channels)
+are another. The 2025 Varga et al. Nat Commun paper on partial agonist design at opioid receptors
+suggests the lab is thinking carefully about how receptor conformation determines output — I'd
+love to discuss how that connects to the stress-induced reversal phenotype.
+</li>
+<li>
+On the experimental side, I have hands-on experience with mammalian cell culture, Western blot,
+ELISA, flow cytometry, and fluorescence microscopy, as well as computational analysis of
+expression data. I'd welcome the chance to contribute on either side.
+</li>
+</ul>
+
+<h2>Methods</h2>
+<p>
+Opioid receptor ISH data from the
+<a href="https://mouse.brain-map.org/" target="_blank">Allen Mouse Brain Atlas</a>
+via the
+<a href="https://api.brain-map.org/api/v2/data/query.json" target="_blank">ABA RMA API</a>,
+July 2026. Gene expression experiments: Oprm1 (69860840), Oprk1 (80517217), Oprd1 (100144385).
+Structure IDs: VTA=749, LHb=186, MHb=483, NAc=56, SNc=374, PFC=972, BLA=295, vHipp=407,
+Hyp=1097, PAG=795, IPN=100. Expression density extracted via StructureUnionize model.
+Figure 2 is a schematic based on Margolis EB (2025) biorXiv, "A switch in kappa opioid receptor
+signaling from inhibitory to excitatory induced by stress in a subset of cortically-projecting
+dopamine neurons." Figures: pure Python SVG. Code:
+<a href="fetch_data.py">fetch_data.py</a>, <a href="make_figures.py">make_figures.py</a>.
+Raw data: <a href="opioid_expression.tsv">opioid_expression.tsv</a>.
+</p>
+
+<div class="meta">
+Cathy Liu — cathyliu014@gmail.com | 415-216-3799<br>
+<a href="https://liuzhitong330.github.io/tvb-llm-robust-neurostim/" target="_blank">Epilepsy neurostimulation project</a> ·
+<a href="https://arxiv.org/abs/2606.04339" target="_blank">arXiv:2606.04339</a>
+</div>
+
+</body>
+</html>
